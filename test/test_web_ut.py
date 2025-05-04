@@ -34,7 +34,7 @@ class ISelenium(unittest.TestCase):
         config = self.get_config()
 
         # 无头模式设置（带默认值）
-        using_headless = os.getenv("using_headless", "false").lower() == "true"
+        using_headless = os.getenv("pytest --alluredir=allure-results", "false").lower() == "true"
         chrome_options = Options()
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
