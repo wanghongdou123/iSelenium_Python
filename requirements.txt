@@ -5,3 +5,4 @@ pytest-testconfig
 requests
 selenium
 urllib3
+pytest-html
