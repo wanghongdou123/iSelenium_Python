@@ -6,3 +6,4 @@ requests
 selenium
 urllib3
 pytest-html
+webdriver-manager
