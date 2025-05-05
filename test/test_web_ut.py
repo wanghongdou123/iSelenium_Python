@@ -33,8 +33,8 @@ class ISelenium(unittest.TestCase):
     def setUp(self):
         config = self.get_config()
 
-        # 无头模式设置（带默认值）
-        using_headless = os.getenv("pytest --alluredir=allure-results", "false").lower() == "true"
+        # 从环境变量中读取using_headless（Jenkins参数）
+        using_headless = os.getenv("USING_HEADLESS", "false").lower() == "true"
         chrome_options = Options()
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
@@ -48,21 +48,10 @@ class ISelenium(unittest.TestCase):
 
         # 初始化 Chrome 驱动
         try:
-            # 方法1：使用webdriver-manager自动管理驱动（推荐）
             self.driver = webdriver.Chrome(
                 service=Service(ChromeDriverManager().install()),
                 options=chrome_options
             )
-
-            # 方法2：使用配置文件中的路径（备用）
-            # chrome_service = Service(
-            #     executable_path=config.get('driver', 'chrome_driver')
-            # )
-            # self.driver = webdriver.Chrome(
-            #     service=chrome_service,
-            #     options=chrome_options
-            # )
-
         except Exception as e:
             print(f"驱动初始化失败: {str(e)}")
             raise
