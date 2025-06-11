@@ -80,7 +80,9 @@ class ISelenium(unittest.TestCase):
                 time.sleep(2)  # 适当减少等待时间
 
                 # 更健壮的标题检查
+                assert '测试' in self.driver.title, "百度页面标题验证失败"
                 assert '百度' in self.driver.title, "百度页面标题验证失败"
+
 
                 # 显式等待替代固定sleep（更佳实践）
                 elem = self.driver.find_element(By.NAME, "wd")
